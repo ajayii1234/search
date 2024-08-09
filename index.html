@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Select with Search and Check Marks</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <style>
+
+        div{
+            border: 0px solid red;
+        }
+        .select2-container--default .select2-results__option[aria-selected="true"] {
+            background-color: #f6f6f6;
+            color: #333;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            display: inline-block;
+            padding: 0 5px;
+            margin: 2px;
+            background-color: #e4e4e4;
+            color: #333;
+            border-radius: 4px;
+            position: relative;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            color: #333;
+        }
+        .select2-container--default .select2-results__option--selected {
+            background-color: #e4e4e4;
+            color: #333;
+        }
+        .select2-container--default .select2-results__option[aria-selected=true]::before {
+            content: "\f00c"; /* Font Awesome checkmark */
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-right: 5px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Storage Location</h4>
+           
+                <select id="custom-select" multiple="multiple" style="width: 100%;">
+                    <option value="00FU">Fuel</option>
+                    <option value="00GF">General Food</option>
+                    <option value="00GN">General Non Food</option>
+                    <option value="00ED">EDP</option>
+                    <option value="10DS">Factory Delivery</option>
+                    <option value="10NF">Non Food</option>
+                    <option value="10FD">Food</option>
+                </select>
+           
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+</div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#custom-select').select2({
+                placeholder: 'Select a storage location',
+                allowClear: true,
+                closeOnSelect: false, // Keep dropdown open after selection
+                templateResult: formatOption
+            });
+
+            function formatOption(option) {
+                if (!option.id) {
+                    return option.text;
+                }
+                var $option = $(
+                    '<span>' + option.text + '</span>'
+                );
+                return $option;
+            }
+        });
+    </script>
+</body>
+</html>
